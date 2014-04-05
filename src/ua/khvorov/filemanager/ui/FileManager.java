@@ -1,7 +1,7 @@
-package ua.khvorov.filemanager.logic;
+package ua.khvorov.filemanager.ui;
 
-import ua.khvorov.filemanager.businessexception.BusinessException;
-import ua.khvorov.filemanager.validation.Validator;
+import ua.khvorov.filemanager.exceptions.BusinessException;
+import ua.khvorov.filemanager.logic.Utilities;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 public class FileManager {
 
-    private Validator validator = new Validator();
+    private Checker checker = new Checker();
     private Switcher switcher = new Switcher();
 
     public void start() {
@@ -18,7 +18,7 @@ public class FileManager {
         File file;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        ChooseStartCatalog.printAvailiableCatalogs();
+        Utilities.printAvailiableCatalogs();
 
         while (true) {
             try {
@@ -31,8 +31,8 @@ public class FileManager {
                 throw new BusinessException(e);
             }
 
-            validator.quitOrNot(inputFromUser);
-            validator.pathValidation(file);
+            checker.quitOrNot(inputFromUser);
+            checker.pathValidation(file);
 
 
             InCatalog.doNext(file.getPath());
@@ -43,10 +43,14 @@ public class FileManager {
                 throw new BusinessException(e);
             }
 
-            validator.quitOrNot(inputFromUser);
-            validator.numberFormatValidation(inputFromUser);
+            checker.quitOrNot(inputFromUser);
+            checker.numberFormatValidation(inputFromUser);
 
-            switcher.userChoice(inputFromUser, file);
+            if (Integer.parseInt(inputFromUser) == 7) {
+                System.out.println("New path :");
+            } else {
+                switcher.userChoice(inputFromUser, file);
+            }
         }
     }
 }
