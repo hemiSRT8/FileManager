@@ -1,10 +1,8 @@
 package ua.khvorov.filemanager.starter;
 
-import ua.khvorov.filemanager.ui.FileManager;
+import ua.khvorov.filemanager.logic.FileManager;
 
 public class Starter {
-
-
     public static void main(String[] args) {
         starter();
     }

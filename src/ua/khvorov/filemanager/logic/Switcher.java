@@ -1,6 +1,4 @@
-package ua.khvorov.filemanager.ui;
-
-import ua.khvorov.filemanager.logic.Utilities;
+package ua.khvorov.filemanager.logic;
 
 import java.io.File;
 
@@ -12,7 +10,7 @@ public class Switcher {
     public void userChoice(String inputFromUser, File file) {
         switch (parseInt(inputFromUser)) {
             case 1: {
-                utilities.showDirectories(file);
+                utilities.showFolders(file);
                 break;
             }
             case 2: {
@@ -20,24 +18,32 @@ public class Switcher {
                 break;
             }
             case 3: {
-                utilities.showDirectories(file);
+                utilities.showFolders(file);
                 utilities.showFiles(file);
                 break;
             }
             case 4: {
-                System.out.println("Folders : " + utilities.calculateSubFolders(file));
+                System.out.println("Loading...");
+                int folders = utilities.calculateSubFolders(file);
+                System.out.println("Folders : " + folders);
                 break;
             }
             case 5: {
-                System.out.println("Files : " + (utilities.calculateSubFiles(file)));
+                System.out.println("Loading...");
+                int files = utilities.calculateSubFiles(file);
+                System.out.println("Files : " + files);
                 break;
             }
             case 6: {
-                System.out.println("Folders : " + utilities.calculateSubFolders(file));
-                System.out.println("Files : " + utilities.calculateSubFiles(file));
+                System.out.println("Loading...");
+                int folders = utilities.calculateSubFolders(file);
+                int files = utilities.calculateSubFiles(file);
+                System.out.println("Folders : " + folders);
+                System.out.println("Files : " + files);
                 break;
             }
         }
+
         System.out.println("\n" + "To continue : enter new path OR type \"quit\" to exit");
     }
 }

@@ -1,4 +1,4 @@
-package ua.khvorov.filemanager.ui;
+package ua.khvorov.filemanager.userinterface.cui;
 
 public class InCatalog {
     public static void doNext(String path) {

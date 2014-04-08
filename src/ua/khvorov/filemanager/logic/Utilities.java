@@ -1,33 +1,35 @@
 package ua.khvorov.filemanager.logic;
 
 import ua.khvorov.filemanager.exceptions.BusinessException;
-import ua.khvorov.filemanager.ui.Checker;
+import ua.khvorov.filemanager.validation.Validator;
 
 import java.io.File;
 
 public class Utilities {
-    private Checker checker = new Checker();
-    private static int count = 0;
 
-    public static void printAvailiableCatalogs() {
-        System.out.println("Choose start catalog :");
-        File[] arrayRoots = File.listRoots();
-        for (File root : arrayRoots) {
-            if (root.canExecute()) {
-                System.out.println(root.getPath());
-            }
+    public void printAvailableCatalogs() {
+        File[] array = File.listRoots();
+        if (array == null) {
+            throw new BusinessException("array is null");
         }
-        System.out.println("Or type \"quit\" to exit from program");
+
+        System.out.println("Choose start catalog :");
+        for (File catalog : array) {
+            System.out.println(catalog.getPath());
+        }
+        System.out.println("Or enter it manually");
+        System.out.println();
+        System.out.println("For exit : type \"quit\"");
     }
 
     public int calculateSubFolders(File file) {
-
+        int count = 0;
         File[] array = file.listFiles();
         if (array != null) {
             for (File f : array) {
-                if (f.isDirectory() && !f.isHidden()) {
+                if (f.isDirectory()) {
                     count++;
-                    calculateSubFolders(f);
+                    count += calculateSubFolders(f);
                 }
             }
         }
@@ -35,54 +37,64 @@ public class Utilities {
     }
 
     public int calculateSubFiles(File file) {
+        int count = 0;
 
-        File[] array = file.listFiles();
-        if (array != null) {
-            for (File f : array) {
-                if (f.isDirectory() && !f.isHidden()) {
-                    calculateSubFiles(f);
-                } else if (f.isFile() && f.canRead()) {
-                    count++;
+        if (file.isFile() && file.canRead()) {
+            count++;
+        } else {
+            File[] array = file.listFiles();
+
+            if (array != null) {
+                for (File f : array) {
+                    if (f.isDirectory()) {
+                        count += calculateSubFiles(f);
+                    } else if (f.isFile()) {
+                        count++;
+                    }
                 }
             }
         }
+
         return count;
     }
 
     public void showFiles(File file) {
-        File[] files = file.listFiles();
-        int filesAmount = 0;
-
-        if (files == null) {
-            throw new BusinessException("file is null");
+        File[] array = file.listFiles();
+        if (array == null) {
+            throw new BusinessException("array is null");
         }
 
-        for (File f : files) {
-            if (!f.isDirectory() && f.canRead()) {
+        int filesAmount = 0;
+
+        for (File f : array) {
+            if (f.isFile()) {
                 System.out.println(f);
                 filesAmount++;
             }
         }
-        checker.filesAmountValidation(filesAmount);
+
+        Validator.amountValidation(filesAmount);
     }
 
-    public void showDirectories(File file) {
-        File[] directories = file.listFiles();
-        int directoriesAmount = 0;
-
-        if (directories == null) {
-            throw new BusinessException("file is null");
+    public void showFolders(File file) {
+        File[] array = file.listFiles();
+        if (array == null) {
+            throw new BusinessException("Array is null");
         }
 
-        if (directories.length > 0) {
-            for (File f : directories) {
-                if (f.isDirectory() && !f.isHidden()) {
-                    System.out.println(f);
-                    directoriesAmount++;
-                }
+        int amountOfRoots = 0;
+
+        for (File f : array) {
+            if (f.isDirectory()) {
+                System.out.println(f);
+                amountOfRoots++;
             }
         }
-        checker.filesAmountValidation(directoriesAmount);
+
+        if (amountOfRoots == 0) {
+            System.out.println("Roots not found");
+        }
+
     }
 }
 
