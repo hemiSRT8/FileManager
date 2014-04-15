@@ -1,6 +1,7 @@
-package ua.khvorov.filemanager.logic;
+package ua.khvorov.filemanager.consoleinterface.logic;
 
 import org.junit.Test;
+import ua.khvorov.filemanager.logic.Utilities;
 
 import java.io.File;
 import java.io.IOException;

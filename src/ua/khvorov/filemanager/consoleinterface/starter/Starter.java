@@ -1,4 +1,4 @@
-package ua.khvorov.filemanager.starter;
+package ua.khvorov.filemanager.consoleinterface.starter;
 
 import ua.khvorov.filemanager.logic.FileManager;
 

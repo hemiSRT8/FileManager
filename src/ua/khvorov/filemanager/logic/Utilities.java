@@ -1,7 +1,7 @@
 package ua.khvorov.filemanager.logic;
 
 import ua.khvorov.filemanager.exceptions.BusinessException;
-import ua.khvorov.filemanager.validation.Validator;
+import ua.khvorov.filemanager.consoleinterface.validation.Validator;
 
 import java.io.File;
 

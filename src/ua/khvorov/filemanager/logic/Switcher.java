@@ -44,6 +44,6 @@ public class Switcher {
             }
         }
 
-        System.out.println("\n" + "To continue : enter new path OR type \"quit\" to exit");
+        System.out.println("\n" + "To continue : enter new getPath OR type \"quit\" to exit");
     }
 }

@@ -1,9 +1,9 @@
 package ua.khvorov.filemanager.logic;
 
 import ua.khvorov.filemanager.exceptions.BusinessException;
-import ua.khvorov.filemanager.starter.Starter;
-import ua.khvorov.filemanager.userinterface.cui.InCatalog;
-import ua.khvorov.filemanager.validation.Validator;
+import ua.khvorov.filemanager.consoleinterface.starter.Starter;
+import ua.khvorov.filemanager.consoleinterface.ui.InCatalog;
+import ua.khvorov.filemanager.consoleinterface.validation.Validator;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,7 +40,7 @@ public class FileManager {
             }
 
             if (!Validator.pathValidation(file)) {
-                System.out.println("Not valid path");
+                System.out.println("Not valid getPath");
                 Starter.starter();
             }
 
@@ -62,7 +62,7 @@ public class FileManager {
             }
 
             if (Integer.parseInt(inputFromUser) == 7) {
-                System.out.println("New path :");
+                System.out.println("New getPath :");
             } else {
                 switcher.userChoice(inputFromUser, file);
             }

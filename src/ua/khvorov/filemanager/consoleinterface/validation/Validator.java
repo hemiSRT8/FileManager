@@ -1,4 +1,4 @@
-package ua.khvorov.filemanager.validation;
+package ua.khvorov.filemanager.consoleinterface.validation;
 
 import java.io.File;
 import java.util.regex.Matcher;
