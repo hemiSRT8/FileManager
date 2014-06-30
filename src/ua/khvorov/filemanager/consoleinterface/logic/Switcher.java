@@ -1,43 +1,44 @@
-package ua.khvorov.filemanager.logic;
+package ua.khvorov.filemanager.consoleinterface.logic;
+
+import ua.khvorov.filemanager.logic.Utilities;
 
 import java.io.File;
 
 import static java.lang.Integer.parseInt;
 
 public class Switcher {
-    private Utilities utilities = new Utilities();
 
     public void userChoice(String inputFromUser, File file) {
         switch (parseInt(inputFromUser)) {
             case 1: {
-                utilities.showFolders(file);
+                AvailableFiles.availableRoots(file);
                 break;
             }
             case 2: {
-                utilities.showFiles(file);
+                AvailableFiles.availableFiles(file);
                 break;
             }
             case 3: {
-                utilities.showFolders(file);
-                utilities.showFiles(file);
+                AvailableFiles.availableFiles(file);
+                AvailableFiles.availableRoots(file);
                 break;
             }
             case 4: {
                 System.out.println("Loading...");
-                int folders = utilities.calculateSubFolders(file);
+                int folders = Utilities.calculateSubFolders(file);
                 System.out.println("Folders : " + folders);
                 break;
             }
             case 5: {
                 System.out.println("Loading...");
-                int files = utilities.calculateSubFiles(file);
+                int files = Utilities.calculateSubFiles(file);
                 System.out.println("Files : " + files);
                 break;
             }
             case 6: {
                 System.out.println("Loading...");
-                int folders = utilities.calculateSubFolders(file);
-                int files = utilities.calculateSubFiles(file);
+                int folders = Utilities.calculateSubFolders(file);
+                int files = Utilities.calculateSubFiles(file);
                 System.out.println("Folders : " + folders);
                 System.out.println("Files : " + files);
                 break;

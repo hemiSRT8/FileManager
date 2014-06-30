@@ -1,6 +1,6 @@
 package ua.khvorov.filemanager.consoleinterface.ui;
 
-public class InCatalog {
+public class PrintCatalogOptions {
     public static void doNext(String path) {
         System.out.println("Current catalog is " + path);
         System.out.println("1)View folders");

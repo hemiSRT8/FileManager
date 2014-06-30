@@ -1,6 +1,6 @@
 package ua.khvorov.filemanager.consoleinterface.starter;
 
-import ua.khvorov.filemanager.logic.FileManager;
+import ua.khvorov.filemanager.consoleinterface.logic.FileManager;
 
 public class Starter {
     public static void main(String[] args) {

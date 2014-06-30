@@ -1,8 +1,8 @@
-package ua.khvorov.filemanager.logic;
+package ua.khvorov.filemanager.consoleinterface.logic;
 
-import ua.khvorov.filemanager.exceptions.BusinessException;
 import ua.khvorov.filemanager.consoleinterface.starter.Starter;
-import ua.khvorov.filemanager.consoleinterface.ui.InCatalog;
+import ua.khvorov.filemanager.consoleinterface.ui.PrintAvailableCatalogs;
+import ua.khvorov.filemanager.consoleinterface.ui.PrintCatalogOptions;
 import ua.khvorov.filemanager.consoleinterface.validation.Validator;
 
 import java.io.BufferedReader;
@@ -13,7 +13,6 @@ import java.io.InputStreamReader;
 public class FileManager {
 
     private Switcher switcher = new Switcher();
-    private Utilities utilities = new Utilities();
 
     public void start() {
         String inputFromUser;
@@ -21,7 +20,7 @@ public class FileManager {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        utilities.printAvailableCatalogs();
+        PrintAvailableCatalogs.printAvailableCatalogs();
 
         for (; ; ) {
             try {
@@ -31,7 +30,7 @@ public class FileManager {
                 }                                                                                                            //jopokod
                 file = new File(inputFromUser);
             } catch (IOException e) {
-                throw new BusinessException(e);
+                throw new RuntimeException(e);
             }
 
             if (Validator.quit(inputFromUser)) {
@@ -44,12 +43,12 @@ public class FileManager {
                 Starter.starter();
             }
 
-            InCatalog.doNext(file.getPath());
+            PrintCatalogOptions.doNext(file.getPath());
 
             try {
                 inputFromUser = br.readLine();
             } catch (IOException e) {
-                throw new BusinessException(e);
+                throw new RuntimeException(e);
             }
 
             if (Validator.quit(inputFromUser)) {
